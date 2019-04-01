@@ -1,0 +1,22 @@
+mkdir demo
+cd demo
+echo "# demo" >> README.md
+git init //把这个目录变成Git可以管理的仓库
+git add README.md //文件添加到仓库
+git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了（空目录不会被添加）
+git status //查看当前工作区的状态（需提交的变更）
+git commit -m "first commit" //把文件提交到仓库
+git remote add origin git@github.com:hxf0663/demo.git //关联远程仓库
+git pull origin master    //上传不成功需先拉到本地
+git push -u origin master //将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)
+git push origin master //将本地主分支推到远程主分支
+下载操作：
+git pull origin master //把远程库更改拉到本地仓库
+git clone git@github.com:hxf0663/demo.git //克隆远程仓库到本地
+git clone https://github.com/hxf0663/demo.git //克隆远程仓库到本地
+git clone https://github.com/hxf0663/demo //克隆远程仓库到本地
+--------------------- 
+作者：疯跑蜗牛 
+来源：CSDN 
+原文：https://blog.csdn.net/hxf0663/article/details/79527453 
+版权声明：本文为博主原创文章，转载请附上博文链接！
