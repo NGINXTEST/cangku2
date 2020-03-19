@@ -1,0 +1,71 @@
+将源码包打包成rpm包（以nginx源码包为例）
+
+yum -y install rpm-build
+
+rpmbuild -ba abc
+
+cd rpmbuild
+
+将源码包放到/root/rpmbuild/SOUTCES/下
+cp nginx-1.12.2.tar.gz /root/rpmbuild/SOUTCES/
+
+cd SPECS
+vim nginx.spec           #后面的后缀必须spec
+
+
+Name:nginx
+Version:1.14.2
+Release:10
+Summary:this is a web server
+
+#Group:         
+License:GPL
+URL:www.baidu.com
+Source0:nginx-1.14.2.tar.gz
+
+#BuildRequires: 
+#Requires:      
+
+%description
+thsi is a web server toooooo
+
+
+%post                  #安装后执行脚本,非必须操作
+useradd nginx
+
+%prep                  #自动解压源码包并cd进去
+%setup -q
+
+%build
+./configure --with-http_ssl_module     #自己需要加入模块
+make %{?_smp_mflags}
+
+
+%install
+make install DESTDIR=%{buildroot}     #安装到根目录/root/rpmbuild/buildroot/
+
+
+%files
+%doc
+/usr/local/nginx/*                  #实际安装目录
+
+
+%changelog
+
+
+ rpmbuild -ba nginx.spec
+ cd ../RPMS/
+ ls
+ cd x86_64/
+ ls
+ rpm -ivh nginx-1.14.2-10.x86_64.rpm 
+
+
+
+
+
+
+
+
+
+
