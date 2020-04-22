@@ -2,8 +2,7 @@ linux下IPTABLES配置详解
 -A RH-Firewall-1-INPUT -p tcp -m state --state NEW -m tcp --dport 24000 -j ACCEPT
 -A RH-Firewall-1-INPUT -s 121.10.120.24 -p tcp -m tcp --dport 18612 -j ACCEPT
  
-如果你的IPTABLES基础知识还不了解,建议先去看看.
-开始配置
+
 我们来配置一个filter表的防火墙.
 (1)查看本机关于IPTABLES的设置情况
 [root@tp ~]# iptables -L -n
@@ -124,6 +123,7 @@ IPTABLES -A OUTPUT -o lo -p all -j ACCEPT(如果是OUTPUT DROP)
 设置ICMP包过滤,允许每秒1个包,限制触发条件是10个包.
 [root@tp ~]#iptables -A FORWARD -p icmp -m limit --limit 1/s --limit-burst 10 -j ACCEPT
 我在前面只所以允许ICMP包通过,就是因为我在这里有限制.
+
 二,配置一个NAT表放火墙
 1,查看本机关于NAT的设置情况
 [root@tp rc.d]# iptables -t nat -L
